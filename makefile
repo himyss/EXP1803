@@ -23,34 +23,34 @@ ROOTCFLAGS = $(shell root-config --cflags)
 PWD = $(shell pwd)
 #INSTALLFOLDER = $(HOME)/AculLib
 
-EXP2018 = $(PWD)/dataClasses
+EXP1803 = $(PWD)/dataClasses
 
--include $(EXP2018)/EXP2018.mk
+-include $(EXP1803)/EXP1803.mk
 
-all: libEXP2018.so 
+all: libEXP1803.so 
 
 clean:
-	-$(RM) $(EXP2018OBJS) $(EXP2018CPP_DEPS)
-	-$(RM) $(EXP2018)/EXP2018Cint.*
-	-$(RM) libEXP2018.so
+	-$(RM) $(EXP1803OBJS) $(EXP1803CPP_DEPS)
+	-$(RM) $(EXP1803)/EXP1803Cint*
+	-$(RM) libEXP1803.so
 	-@echo ' '
 
  Those *Cint* files below need special treating:
-$(EXP2018)/EXP2018Cint.cpp:
-	-@echo 'Pre-building EXP2018Cint.cpp and analyseRaw.h files'
-	-rootcint -f $(EXP2018)/EXP2018Cint.cpp -c -p $(EXP2018_HEADERS)
+$(EXP1803)/EXP1803Cint.cpp:
+	-@echo 'Pre-building EXP1803Cint.cpp and analyseRaw.h files'
+	-rootcint -f $(EXP1803)/EXP1803Cint.cpp -c -p $(EXP1803_HEADERS)
 	-@echo ' '
 
 #*.so files
-libEXP2018.so: $(EXP2018OBJS)
+libEXP1803.so: $(EXP1803OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	$(CC) -L . -L $(ROOTLIBS) -shared -o"libEXP2018.so" $(EXP2018OBJS) $(EXP2018LIBS)
+	$(CC) -L . -L $(ROOTLIBS) -shared -o"libEXP1803.so" $(EXP1803OBJS) $(EXP1803LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 .PHONY: all clean
-#.SECONDARY: EXP2018_pre-build TELoss_pre-build Detectors_pre-build libEXP2018.so libTELoss.so libDetectors.so
+#.SECONDARY: EXP1803_pre-build TELoss_pre-build Detectors_pre-build libEXP1803.so libTELoss.so libDetectors.so
 
 # Each subdirectory must supply rules for building sources it contributes
 %.o: %.cpp
